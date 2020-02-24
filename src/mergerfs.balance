@@ -253,11 +253,13 @@ def main():
     seen = set()
     try:
         l = freespace_percentage(srcmounts)
+        print(l)
         while not all_within_range(l,percentage):
             todrive     = l[-1][0]
             relfilepath = None
             while not relfilepath:
-                if len(l) == 0 or len(l[0]) == 0:
+                if len(l) == 0:
+                    print('srcmount list empty: exiting...')
                     break
                 fromdrive = l[0][0]
                 del l[0]
@@ -283,6 +285,7 @@ def main():
                 print('ERROR - exited with exit code: {}'.format(rv))
                 break
             l = freespace_percentage(srcmounts)
+            print(l)
     except KeyboardInterrupt:
         print("exiting: CTRL-C pressed")
 
